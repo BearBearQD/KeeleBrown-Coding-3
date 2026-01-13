@@ -1,14 +1,16 @@
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
+using UnityEngine;
 
 
 namespace NodeCanvas.Tasks.Actions {
 
 	public class Idle : ActionTask {
 
-		//Use for initialization. This is called only once in the lifetime of the task.
-		//Return null if init was successfull. Return an error string otherwise
-		protected override string OnInit() {
+        public int size = 3;
+        //Use for initialization. This is called only once in the lifetime of the task.
+        //Return null if init was successfull. Return an error string otherwise
+        protected override string OnInit() {
 			return null;
 		}
 
@@ -16,8 +18,8 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
-			EndAction(true);
-		}
+            agent.transform.localScale += new Vector3(size, size, size);
+        }
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
@@ -26,8 +28,9 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
-			
-		}
+			agent.transform.localScale += new Vector3(1, 1, 1);
+
+        }
 
 		//Called when the task is paused.
 		protected override void OnPause() {
